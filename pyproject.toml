@@ -1,6 +1,6 @@
 [project]
 name = "aioadaptive"
-version = "0.1.2"
+version = "0.1.4"
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -77,8 +77,10 @@ fixable = ["ALL"]
     "D104",
     "ANN001",
     "ANN101",
+    "ANN202",
     "ANN201",
     "TRY002",
     "TRY003",
     "EM101",
+    "RET504",
 ]
