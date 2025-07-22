@@ -1,14 +1,23 @@
-# Aio Http Adaptive
+# Aio Adaptive
 
-## Initial Setup
+Project is based off of [Netflix Concurrency](https://github.com/Netflix/concurrency-limits), but for python!
+The initial setup allows for someone to configure the Vegas adaptive rate limit.
 
-1. **Navigate to the Server Directory**
+See the examples below for how to leverage it.
+
+## Install
+
+TODO
+
+## Developer Setup
+
+1. Navigate to the Server Directory
 
    ```bash
-   cd server
+   cd aioadaptive
    ```
 
-2. **Install Server Requirements**
+2. Install Server Requirements
 
    ```bash
    uv venv .venv
@@ -16,3 +25,8 @@
    uv sync
    ```
 
+3. Run tests
+
+   ```bash
+   pytest
+   ```
