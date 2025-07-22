@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class AdaptiveClientConfig:
     """Configuration for the AdaptiveClient."""
 
-    algorithm: Literal["vegas"] = "vegas"
+    algorithm: Literal["vegas"] | AbstractLimiter = "vegas"
 
 
 class AdaptiveClient:
@@ -42,7 +42,9 @@ class AdaptiveClient:
 
         """
         self._config = config or AdaptiveClientConfig()
-        if self._config.algorithm == "vegas":
+        if isinstance(self._config.algorithm, AbstractLimiter):
+            self._throughput_limiter = self._config.algorithm
+        elif self._config.algorithm == "vegas":
             self._throughput_limiter = VegasLimiter()
         else:
             msg = f"Algorithm '{self._config.algorithm}' not supported"
