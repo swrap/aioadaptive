@@ -30,18 +30,21 @@ uv add aioadaptive
 
 ```python
 from aioadaptive import AdaptiveClient, AdaptiveClientConfig
+from aioadaptive.limiter import VegasLimiter
 
 # Default configuration is to use `vegas` algorithm
 client = AdaptiveClient()
 # Same as doing
 client = AdaptiveClient(AdaptiveClientConfig(algorithm="vegas"))
 # Which is also the same as doing
-client = AdaptiveClient(AdaptiveClientConfig(algorithm="vegas"))
+client = AdaptiveClient(AdaptiveClientConfig(algorithm=VegasLimiter()))
+
 
 async def main():
     async with client.use():
         # Do something with adaptive rate limiting client
         pass
+
 
 asyncio.run(main())
 ```
