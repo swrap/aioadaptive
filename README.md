@@ -41,15 +41,42 @@ client = AdaptiveClient(AdaptiveClientConfig(algorithm=VegasLimiter()))
 
 
 async def main():
-    async with client.use():
-        # Do something with adaptive rate limiting client
-        pass
+   # Use the `client` wherever you want to have a persistent rate limit
+   async with client.use():
+      # Do something with adaptive rate limiting client
+      pass
+
+
+asyncio.run(main())
+```
+
+I.e. Multiple endpoint setup
+
+```python
+from aioadaptive import AdaptiveClient, AdaptiveClientConfig
+from aioadaptive.limiter import VegasLimiter
+
+# Create a client per API or endpoint. Anything within the `client.use` will be concurrently rate limited within `async with` block.
+client1 = AdaptiveClient()
+client2 = AdaptiveClient()
+
+async def main():
+   async with client1.use():
+      # Make some http calls to endpoint 1
+      # Will rate limit adaptively based on the latency
+      ...
+   async with client2.use():
+      # Make some http calls to endpoint 2
+      # Will rate limit adaptively based on the latency
+      ...
 
 
 asyncio.run(main())
 ```
 
 ### With aiohttp (async)
+
+*Note* Keep in mind that `aiohttp` has default a [limit connections per host](https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BaseConnector.limit) of 100.
 
 ```python
 import aiohttp
