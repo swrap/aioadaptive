@@ -46,9 +46,12 @@ class VegasLimiter(AbstractLimiter):
         # https://github.com/Netflix/concurrency-limits/blob/main/concurrency-limits-core/src/main/java/com/netflix/concurrency/limits/limit/VegasLimit.java#L39-L40
         self._alpha = max(ALPHA, self._limit * 0.1)
         self._beta = max(BETA, self._limit * 0.2)
-        logger.debug(
-            f"RTT: {round_trip_time}ms, Queue Size: {queue_size}, Limit: {self._limit}, Queue Low: {self._alpha}, Queue High: {self._beta}",
+
+        debug_msg = (
+            f"RTT: {round_trip_time}ms, Queue Size: {queue_size}, "
+            f"Limit: {self._limit}, Queue Low: {self._alpha}, Queue High: {self._beta}"
         )
+        logger.debug(debug_msg)
 
         # TODO: Future work is to update estimator: https://github.com/Netflix/concurrency-limits/blob/main/concurrency-limits-core/src/main/java/com/netflix/concurrency/limits/limit/VegasLimit.java#L279-L321
 

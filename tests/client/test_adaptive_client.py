@@ -2,6 +2,7 @@ from typing import Self
 from unittest.mock import Mock, call, patch
 
 import pytest
+
 from aioadaptive import AdaptiveClient, AdaptiveClientConfig
 from aioadaptive.limiter._limiter import AbstractLimiter
 
@@ -45,9 +46,7 @@ class TestAdaptiveClientUse:
             ]
             assert client._capacity_limiter.total_tokens == 2
 
-    async def test_use_context_manager_limit_exception(
-        self: Self, client, limiter_mock
-    ):
+    async def test_use_context_manager_limit_exception(self: Self, client, limiter_mock):
         with pytest.raises(Exception, match="test exception"):
             async with client.use():
                 raise Exception("test exception")

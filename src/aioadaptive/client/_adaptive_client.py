@@ -55,6 +55,7 @@ class AdaptiveClient:
 
         Yields:
             AsyncGenerator[Self, None]: The client instance.
+
         """
         async with self._capacity_limiter:
             start = time.time()
